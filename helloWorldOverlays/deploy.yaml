@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: the-deployment
+spec:
+  template:
+    spec: 
+      containers:
+      - name: the-container
+        # command merge won't work, have to copy full command array
+        command: 
+        - "/hello"
+        - "--port=8080"
+        - "--enableRiskyFeature=$(ENABLE_RISKY)"
+        - --overlay-from=haitao
+        # env merge seems works
+        env:
+        - name: haitao
+          value: here
